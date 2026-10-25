@@ -1,23 +1,94 @@
-/* Genel Sayfa Ayarları */
+/* Doğa Temalı Canlı ve Hareketli Arka Plan Sınıfı */
 body {
-    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', sans-serif; /* Daha eğlenceli yazı tipleri */
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', sans-serif;
+    /* Doğa renklerinde esnek geçiş */
+    background: linear-gradient(-45deg, #e8f5e9, #c8e6c9, #e0f2f1, #f1f8e9);
+    background-size: 400% 400%;
+    /* Arka plandaki renklerin yavaşça dalgalanmasını sağlayan animasyon */
+    animation: dogaDalgalanma 15s ease infinite;
     text-align: center;
     padding: 25px 15px;
     margin: 0;
-    color: #333;
+    color: #2e7d32; /* Yazı rengi doğaya uygun koyu yeşil */
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* Eğlenceli Başlık */
+/* Sayfa Arka Planında Uçuşan Sanal Yaprak Efektleri (CSS Görsel Katmanları) */
+body::before, body::after {
+    content: "🍃";
+    position: fixed;
+    top: -50px;
+    font-size: 24px;
+    opacity: 0.15;
+    pointer-events: none;
+    animation: yaprakDusmesi 12s linear infinite;
+}
+
+body::before {
+    left: 20%;
+    animation-delay: 1s;
+    font-size: 28px;
+}
+
+body::after {
+    left: 80%;
+    animation-delay: 5s;
+    font-size: 20px;
+    content: "🌱";
+}
+
+/* Arka Plan Renk Dalgası Animasyonu */
+@keyframes dogaDalgalanma {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Yukarıdan Aşağıya Süzülen Yaprak Animasyonu */
+@keyframes yaprakDusmesi {
+    0% {
+        top: -50px;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 0.25; }
+    90% { opacity: 0.25; }
+    100% {
+        top: 105vh;
+        transform: translateX(80px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Eğlenceli Başlık - Doğa Temalı */
 h1 {
     font-size: 32px;
-    color: #4a4e69;
     margin-bottom: 25px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    background: linear-gradient(45deg, #2e7d32, #4db6ac);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+/* Kartların altına hafif bir doğa gölgesi eklemek için mevcut .kelime-kart kısmını bununla güncelleyin */
+.kelime-kart {
+    border: none;
+    border-radius: 20px;
+    padding: 22px 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(46, 125, 50, 0.08); /* Yeşilimsi hafif gölge */
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
 
 /* Kelime Kartları Konteyneri */
 .sozluk-konteyner {
