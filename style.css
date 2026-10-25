@@ -1,71 +1,103 @@
+/* Genel Sayfa Ayarları */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', sans-serif; /* Daha eğlenceli yazı tipleri */
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
     text-align: center;
-    padding: 15px;
+    padding: 25px 15px;
     margin: 0;
-}
-
-h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
     color: #333;
 }
 
+/* Eğlenceli Başlık */
+h1 {
+    font-size: 32px;
+    color: #4a4e69;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Kelime Kartları Konteyneri */
 .sozluk-konteyner {
     display: grid;
-    /* Telefonlarda en az 2 sütun yapar, ekran büyüdükçe sütun sayısı otomatik artar */
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: 15px;
     max-width: 1000px;
     margin: 0 auto;
 }
 
+/* Ortak Kart Tasarımı */
 .kelime-kart {
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 16px; /* Daha yumuşak köşeler mobil için idealdir */
-    padding: 20px 10px; /* Parmakla basmayı kolaylaştırmak için dikey boşluk artırıldı */
+    border: none;
+    border-radius: 20px; /* Daha oval, sevimli köşeler */
+    padding: 22px 10px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Yaylanan eğlenceli animasyon */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    -webkit-tap-highlight-color: transparent; /* Mobil tıklama karartmasını kaldırır */
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* Kelime Başlığı */
+/* Renk Döngüsü: 25 kart için sırayla 5 farklı eğlenceli pastel renk tanımlıyoruz */
+.kelime-kart:nth-child(5n+1) { background-color: #ffadad; } /* Pembe */
+.kelime-kart:nth-child(5n+2) { background-color: #ffd6a5; } /* Turuncu */
+.kelime-kart:nth-child(5n+3) { background-color: #fdffb6; } /* Sarı */
+.kelime-kart:nth-child(5n+4) { background-color: #caffbf; } /* Yeşil */
+.kelime-kart:nth-child(5n+5) { background-color: #9bf6ff; } /* Mavi */
+
+/* Kartların İçindeki Yazıların Renkleri */
 .kelime-kart h3 {
-    margin: 0 0 5px 0;
+    margin: 0 0 4px 0;
     font-size: 20px;
-    color: #222;
+    color: #2b2d42;
+    font-weight: bold;
 }
 
-/* Kelime Anlamı */
 .kelime-kart p {
-    margin: 0 0 10px 0;
-    font-size: 14px;
-    color: #666;
+    margin: 0 0 12px 0;
+    font-size: 15px;
+    color: #4a4e69;
+    font-style: italic;
 }
 
-/* Ses İkonu */
+/* Yenilenen Yuvarlak Ses Butonu */
 .ses-ikonu {
-    font-size: 22px;
-    color: #007bff;
-    background: #e6f0ff;
-    padding: 6px;
+    font-size: 18px;
+    color: #333;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 8px;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
 }
 
-/* Mobilde parmak basılı tutulduğunda efekt */
+/* Bilgisayarda Fareyle Üzerine Gelince (Hover Efekti) */
+@media (hover: hover) {
+    .kelime-kart:hover {
+        transform: translateY(-8px) scale(1.03); /* Yukarı zıplama efekti */
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+    }
+    .kelime-kart:hover .ses-ikonu {
+        transform: scale(1.15); /* Ses ikonu hafifçe büyür */
+        background: #ffffff;
+    }
+}
+
+/* Mobilde Parmakla Dokunulduğunda (Tıklama Efekti) */
 .kelime-kart:active {
-    transform: scale(0.95);
-    background-color: #f0f5ff;
-    border-color: #007bff;
+    transform: scale(0.92); /* İçe doğru basılma hissi */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    filter: brightness(0.95);
 }
